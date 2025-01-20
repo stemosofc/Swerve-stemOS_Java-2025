@@ -75,11 +75,4 @@ public final class Constants {
 
       public static final double constantRotation = 4;
     }
-
-    // Classe que guarda os nomes das trajetórias
-    public static final class Trajetoria {
-      public static final boolean ALIANCA = false; // Caso a aliança seja azul use false, se for vermelha use true
-      public static final String NOME_TRAJETORIA = "New Auto";
-      public static final String NOME_TRAJETORIA2 = "New Path2";
-    }
 }

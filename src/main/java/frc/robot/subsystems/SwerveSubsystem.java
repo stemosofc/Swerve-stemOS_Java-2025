@@ -122,7 +122,7 @@ public class SwerveSubsystem extends SubsystemBase {
   }
 
   //Movimenta o robô com o joystick esquerdo, e mira o robo no ângulo no qual o joystick está apontando
-  public Command driveCommand(DoubleSupplier translationX, DoubleSupplier translationY, DoubleSupplier headingX,
+  public Command driveCommandAlignWithJoystick(DoubleSupplier translationX, DoubleSupplier translationY, DoubleSupplier headingX,
                               DoubleSupplier headingY)
   {
     return run(() -> {
