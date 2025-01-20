@@ -10,7 +10,7 @@ import java.util.function.DoubleSupplier;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.Dimensoes;
-import frc.robot.Constants.Tracao;
+import frc.robot.Constants.SwerveConfigs;
 import frc.robot.subsystems.SwerveSubsystem;
 import swervelib.SwerveController;
 import swervelib.math.SwerveMath;
@@ -54,16 +54,16 @@ public class Teleop extends Command {
     // Abaixo calculamos os valores de saída a partir dos nossos inputs
     @Override
     public void execute() {
-    double xVelocity   = y.getAsDouble() * Tracao.multiplicadorTranslacionalY;
-    double yVelocity   = x.getAsDouble() * Tracao.multiplicadorTranslacionalX;
-    double angVelocity = turn.getAsDouble() * Tracao.multiplicadorRotacional;
+    double xVelocity   = y.getAsDouble() * SwerveConfigs.multiplicadorTranslacionalY;
+    double yVelocity   = x.getAsDouble() * SwerveConfigs.multiplicadorTranslacionalX;
+    double angVelocity = turn.getAsDouble() * SwerveConfigs.multiplicadorRotacional;
    
-    translation = new Translation2d(xVelocity * Tracao.MAX_SPEED, yVelocity * Tracao.MAX_SPEED);
+    translation = new Translation2d(xVelocity * Dimensoes.MAX_SPEED, yVelocity * Dimensoes.MAX_SPEED);
 
     omega = controller.config.maxAngularVelocity * angVelocity;
     
     // Caso essa função seja verdadeira a aceleração do robô será limitada
-    if(Tracao.accelCorrection) {
+    if(SwerveConfigs.accelCorrection) {
         translation = SwerveMath.limitVelocity(translation, swerve.getFieldVelocity(), swerve.getPose(),
                                               Dimensoes.LOOP_TIME, Dimensoes.ROBOT_MASS, 
                                                List.of(Dimensoes.CHASSIS),
@@ -71,7 +71,7 @@ public class Teleop extends Command {
     }
     
     // Aqui temos nossa função definida dentro da classe de subsistema a qual comandara o swerve
-    swerve.drive(translation, omega, Tracao.fieldRelative);
+    swerve.drive(translation, omega, true);
     }
 
     

@@ -22,7 +22,6 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import frc.robot.Constants.Tracao;
 import swervelib.SwerveController;
 import swervelib.SwerveDrive;
 import swervelib.telemetry.SwerveDriveTelemetry;
@@ -122,7 +121,7 @@ public class SwerveSubsystem extends SubsystemBase {
   }
 
   //Movimenta o robô com o joystick esquerdo, e mira o robo no ângulo no qual o joystick está apontando
-  public Command driveCommandAlignWithJoystick(DoubleSupplier translationX, DoubleSupplier translationY, DoubleSupplier headingX,
+  public Command driveCommandAlinharComJoystick(DoubleSupplier translationX, DoubleSupplier translationY, DoubleSupplier headingX,
                               DoubleSupplier headingY)
   {
     return run(() -> {
@@ -172,7 +171,7 @@ public class SwerveSubsystem extends SubsystemBase {
 
   public ChassisSpeeds getTargetSpeeds(double xInput, double yInput) 
   {
-    return swerveDrive.swerveController.getTargetSpeeds(xInput, yInput, 0, 0, 0, Tracao.MAX_SPEED);
+    return new ChassisSpeeds(xInput, yInput, 0);
   }
 
   // Função que retorna a posição do robô (translação e ângulo), (Usado no autônomo)

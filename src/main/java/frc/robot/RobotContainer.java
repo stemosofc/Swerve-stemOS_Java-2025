@@ -51,7 +51,7 @@ public class RobotContainer {
 
   // Função onde os eventos (triggers) são configurados
   private void configureBindings() {
-    controleXbox.a().onTrue(swerve.driveCommandAlignWithJoystick(
+    controleXbox.a().onTrue(swerve.driveCommandAlinharComJoystick(
     () -> MathUtil.applyDeadband(controleXbox.getLeftY(), Constants.Controle.DEADBAND),
     () -> MathUtil.applyDeadband(controleXbox.getLeftX(), Constants.Controle.DEADBAND),
     () -> controleXbox.getRightX(),

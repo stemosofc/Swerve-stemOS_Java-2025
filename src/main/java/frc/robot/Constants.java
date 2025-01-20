@@ -4,11 +4,11 @@
 
 package frc.robot;
 
+import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.geometry.Translation3d;
-import edu.wpi.first.math.util.Units;
 import swervelib.math.Matter;
 import swervelib.math.SwerveMath;
-import swervelib.parser.PIDFConfig;
+import swervelib.parser.SwerveDriveConfiguration;
 
 /**
  * Classe de constantes
@@ -19,12 +19,15 @@ public final class Constants {
   public static final class Dimensoes {
     // Tempo de loop (sparkMax + normal = 130ms)
     public static final double LOOP_TIME = 0.13;
-    // Massa do robô
+    // Massa do robô *DEVE SER CONFIGURADO PARA O SEU ROBÔ*
     public static final double ROBOT_MASS = 38;
-    //Velocidade máxima
+    //Velocidade máxima *DEVE SER CONFIGURADO PARA O SEU ROBÔ*
     public static final double MAX_SPEED = 4;
+    //Posição do módulo mais longe *COLOQUE OS MESMOS VALORES DO JSON*
+    private static final Translation2d FURTHEST_MODULE_POSE = new Translation2d(MAX_SPEED, LOOP_TIME);
+    public static final double MAX_ANGULAR_SPEED = SwerveMath.calculateMaxAngularVelocity(MAX_SPEED, FURTHEST_MODULE_POSE.getX(), FURTHEST_MODULE_POSE.getY());
 
-    //Posições do centro de massa
+    //Posições do centro de massa *DEVE SER CONFIGURADO PARA SEU ROBÔ*
     private static final double xMass = 0;
     private static final double yMass = 0;
     private static final double zMass = .08;
@@ -32,16 +35,6 @@ public final class Constants {
     // Centro de massa do chassi
     public static final Matter CHASSIS    = new Matter(new Translation3d(xMass, yMass, (zMass)), ROBOT_MASS);
    }
-
-    // Classe que contém os PID para o autônomo
-    public static final class PID {
-      // PID para frente e para trás
-      public static final PIDFConfig xAutoPID     = new PIDFConfig(0.65, 0, 0.05);
-      // PID para esquerda e direita
-      public static final PIDFConfig yAutoPID     = new PIDFConfig(0.6, 0, 0);
-      // PID de rotação
-      public static final PIDFConfig angleAutoPID = new PIDFConfig(0.1, 0, 0.01);
-    }
 
     // Contem a porta em que o controle está
     public static final class Controle {
@@ -52,11 +45,7 @@ public final class Constants {
       public static final double DEADBAND = 0.2;
     }
 
-    public static final class Tracao {
-      // Define se a tração vai ser orientada ao campo (sim = true)
-      public static final boolean fieldRelative = true;
-      // false para malha-fechada
-      public static final boolean isOpenLoop = false;
+    public static final class SwerveConfigs {
       // true para correção de aceleração
       public static final boolean accelCorrection = false;
       // constante para diminuir o input do joystick (0 < multiplicadorRotacional <= 1)
@@ -67,9 +56,6 @@ public final class Constants {
       public static final double multiplicadorTranslacionalX = 0.7;
 
       public static final double TURN_CONSTANT = 0.75;
-
-      // constante que define a velocidade máxima
-      public static final double MAX_SPEED = 4.4;
 
       public static final double dt = 0.02;
 
