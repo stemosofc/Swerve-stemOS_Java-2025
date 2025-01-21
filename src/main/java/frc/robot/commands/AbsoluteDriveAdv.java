@@ -9,8 +9,9 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Constants;
 import frc.robot.Constants.Dimensoes;
-import frc.robot.Constants.Tracao;
+import frc.robot.Constants.SwerveConfigs;
 import frc.robot.subsystems.SwerveSubsystem;
 
 import java.util.List;
@@ -99,7 +100,7 @@ public class AbsoluteDriveAdv extends Command
 
     //Dont overwrite a button press
     if(headingX == 0 && headingY == 0 && Math.abs(headingAdjust.getAsDouble()) > 0){
-      newHeading = Rotation2d.fromRadians(Tracao.TURN_CONSTANT * -headingAdjust.getAsDouble())
+      newHeading = Rotation2d.fromRadians(Constants.Dimensoes.MAX_ANGULAR_SPEED* -headingAdjust.getAsDouble())
                                                                       .plus(swerve.getHeading());
       headingX = newHeading.getSin();
       headingY = newHeading.getCos();
@@ -128,9 +129,9 @@ public class AbsoluteDriveAdv extends Command
     Translation2d translation = SwerveController.getTranslation2d(desiredSpeeds);
 
     // Caso essa função seja verdadeira a aceleração do robô será limitada
-    if(Tracao.accelCorrection) {
+    if(SwerveConfigs.accelCorrection) {
         translation = SwerveMath.limitVelocity(translation, swerve.getFieldVelocity(), swerve.getPose(),
-                                              Dimensoes.LOOP_TIME, Dimensoes.ROBOT_MASS, 
+        Dimensoes.LOOP_TIME, Dimensoes.ROBOT_MASS, 
                                                List.of(Dimensoes.CHASSIS),
                                                swerve.getSwerveDriveConfiguration());
 
@@ -141,7 +142,7 @@ public class AbsoluteDriveAdv extends Command
 
 
     // Make the robot move
-    swerve.drive(translation, desiredSpeeds.omegaRadiansPerSecond, Tracao.fieldRelative);
+    swerve.drive(translation, desiredSpeeds.omegaRadiansPerSecond, true);
   }
 
   // Called once the command ends or is interrupted.
