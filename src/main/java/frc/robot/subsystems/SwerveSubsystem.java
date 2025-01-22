@@ -9,7 +9,6 @@ import java.util.function.DoubleSupplier;
 
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.commands.PathPlannerAuto;
-import com.pathplanner.lib.commands.PathfindingCommand;
 import com.pathplanner.lib.config.PIDConstants;
 import com.pathplanner.lib.config.RobotConfig;
 import com.pathplanner.lib.controllers.PPHolonomicDriveController;
@@ -22,6 +21,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.Constants.SwerveConfigs;
 import swervelib.SwerveController;
 import swervelib.SwerveDrive;
 import swervelib.telemetry.SwerveDriveTelemetry;
@@ -47,7 +47,9 @@ public class SwerveSubsystem extends SubsystemBase {
         } catch (Exception e) {
           throw new RuntimeException(e);
         }
-        swerveDrive.setHeadingCorrection(true);
+        swerveDrive.setHeadingCorrection(Constants.SwerveConfigs.headingCorrection);
+        swerveDrive.angularVelocityCorrection =  SwerveConfigs.usarCorrecaoDesvioVelocidadeAngular;
+        swerveDrive.angularVelocityCoefficient = SwerveConfigs.coeficienteCoreçãoAngVel;
         setupPathPlanner();
     }
     

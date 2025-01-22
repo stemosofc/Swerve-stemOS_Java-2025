@@ -46,6 +46,8 @@ public final class Constants {
     }
 
     public static final class SwerveConfigs {
+      // variável que ativa o PID para controlar a orientação do robô (PID tunado no json)
+      public static final boolean headingCorrection = false;
       // true para correção de aceleração
       public static final boolean accelCorrection = false;
       // constante para diminuir o input do joystick (0 < multiplicadorRotacional <= 1)
@@ -54,11 +56,10 @@ public final class Constants {
       public static final double multiplicadorTranslacionalY = 0.7;
       // constante para diminuir o input do joystick (x)
       public static final double multiplicadorTranslacionalX = 0.7;
-
       public static final double TURN_CONSTANT = 0.75;
-
-      public static final double dt = 0.02;
-
-      public static final double constantRotation = 4;
+      // variável que ativa a coração para resolver problema de "skew"
+      public static final boolean usarCorrecaoDesvioVelocidadeAngular = false;
+      // constante que corrije o skew (de -0.15 - 0.15) ESSA VARIÁVEL DEVE SER TUNADA PARA SEU ROBÔ
+      public static final double coeficienteCoreçãoAngVel = 4;
     }
 }
