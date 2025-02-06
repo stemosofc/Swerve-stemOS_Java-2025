@@ -60,6 +60,6 @@ public final class Constants {
       // variável que ativa a coração para resolver problema de "skew"
       public static final boolean usarCorrecaoDesvioVelocidadeAngular = false;
       // constante que corrije o skew (de -0.15 - 0.15) ESSA VARIÁVEL DEVE SER TUNADA PARA SEU ROBÔ
-      public static final double coeficienteCoreçãoAngVel = 4;
+      public static final double coeficienteCorecaoAngVel = 4;
     }
 }

@@ -49,7 +49,7 @@ public class SwerveSubsystem extends SubsystemBase {
         }
         swerveDrive.setHeadingCorrection(Constants.SwerveConfigs.headingCorrection);
         swerveDrive.angularVelocityCorrection =  SwerveConfigs.usarCorrecaoDesvioVelocidadeAngular;
-        swerveDrive.angularVelocityCoefficient = SwerveConfigs.coeficienteCoreçãoAngVel;
+        swerveDrive.angularVelocityCoefficient = SwerveConfigs.coeficienteCorecaoAngVel;
         setupPathPlanner();
     }
     
